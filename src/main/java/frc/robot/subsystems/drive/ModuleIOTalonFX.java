@@ -41,7 +41,7 @@ import java.util.Queue;
  */
 public class ModuleIOTalonFX implements ModuleIO {
   private final TalonFX driveTalon;
-  private final TalonFX turnTalon;
+  private final TalonFX angleTalon;
   private final CANcoder cancoder;
 
   private final Queue<Double> timestampQueue;
@@ -70,25 +70,25 @@ public class ModuleIOTalonFX implements ModuleIO {
     switch (index) {
       case 0:
         driveTalon = new TalonFX(0);
-        turnTalon = new TalonFX(1);
+        angleTalon = new TalonFX(1);
         cancoder = new CANcoder(2);
         absoluteEncoderOffset = new Rotation2d(0.0); // MUST BE CALIBRATED
         break;
       case 1:
         driveTalon = new TalonFX(3);
-        turnTalon = new TalonFX(4);
+        angleTalon = new TalonFX(4);
         cancoder = new CANcoder(5);
         absoluteEncoderOffset = new Rotation2d(0.0); // MUST BE CALIBRATED
         break;
       case 2:
         driveTalon = new TalonFX(6);
-        turnTalon = new TalonFX(7);
+        angleTalon = new TalonFX(7);
         cancoder = new CANcoder(8);
         absoluteEncoderOffset = new Rotation2d(0.0); // MUST BE CALIBRATED
         break;
       case 3:
         driveTalon = new TalonFX(9);
-        turnTalon = new TalonFX(10);
+        angleTalon = new TalonFX(10);
         cancoder = new CANcoder(11);
         absoluteEncoderOffset = new Rotation2d(0.0); // MUST BE CALIBRATED
         break;
@@ -105,7 +105,7 @@ public class ModuleIOTalonFX implements ModuleIO {
     var turnConfig = new TalonFXConfiguration();
     turnConfig.CurrentLimits.SupplyCurrentLimit = 30.0;
     turnConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-    turnTalon.getConfigurator().apply(turnConfig);
+    angleTalon.getConfigurator().apply(turnConfig);
     setTurnBrakeMode(true);
 
     cancoder.getConfigurator().apply(new CANcoderConfiguration());
@@ -120,12 +120,12 @@ public class ModuleIOTalonFX implements ModuleIO {
     driveCurrent = driveTalon.getSupplyCurrent();
 
     turnAbsolutePosition = cancoder.getAbsolutePosition();
-    turnPosition = turnTalon.getPosition();
+    turnPosition = angleTalon.getPosition();
     turnPositionQueue =
-        PhoenixOdometryThread.getInstance().registerSignal(turnTalon, turnTalon.getPosition());
-    turnVelocity = turnTalon.getVelocity();
-    turnAppliedVolts = turnTalon.getMotorVoltage();
-    turnCurrent = turnTalon.getSupplyCurrent();
+        PhoenixOdometryThread.getInstance().registerSignal(angleTalon, angleTalon.getPosition());
+    turnVelocity = angleTalon.getVelocity();
+    turnAppliedVolts = angleTalon.getMotorVoltage();
+    turnCurrent = angleTalon.getSupplyCurrent();
 
     BaseStatusSignal.setUpdateFrequencyForAll(
         Module.ODOMETRY_FREQUENCY, drivePosition, turnPosition);
@@ -139,7 +139,7 @@ public class ModuleIOTalonFX implements ModuleIO {
         turnAppliedVolts,
         turnCurrent);
     driveTalon.optimizeBusUtilization();
-    turnTalon.optimizeBusUtilization();
+    angleTalon.optimizeBusUtilization();
   }
 
   @Override
@@ -194,7 +194,7 @@ public class ModuleIOTalonFX implements ModuleIO {
 
   @Override
   public void setTurnVoltage(double volts) {
-    turnTalon.setControl(new VoltageOut(volts));
+    angleTalon.setControl(new VoltageOut(volts));
   }
 
   @Override
@@ -213,6 +213,6 @@ public class ModuleIOTalonFX implements ModuleIO {
             ? InvertedValue.Clockwise_Positive
             : InvertedValue.CounterClockwise_Positive;
     config.NeutralMode = enable ? NeutralModeValue.Brake : NeutralModeValue.Coast;
-    turnTalon.getConfigurator().apply(config);
+    angleTalon.getConfigurator().apply(config);
   }
 }
