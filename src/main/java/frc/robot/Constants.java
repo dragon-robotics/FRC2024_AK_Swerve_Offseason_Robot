@@ -120,7 +120,7 @@ public final class Constants {
     public static final int SMART_MOTION_SLOT = 0;
     public static final int SMART_MOTION_MAX_VELOCITY = 2000;
     public static final int SMART_MOTION_MIN_OUTPUT_VELOCITY = 0;
-    public static final int SMART_MOTION_MAX_ACCEL = 1500;
+    public static final int SMART_MOTION_MAX_ACCELERATION = 1500;
     public static final int SMART_MOTION_ALLOWED_ERROR = 10;
 
     /* Desired absolute encoder setpoint for moving shooter and amp mechanism (to be tuned later using absolute encoder) */
@@ -315,86 +315,90 @@ public final class Constants {
   public static final class SwerveConstants {
 
     //#region Drivetrain Constants Definitions
-    public static final double kTrackWidth = Units.inchesToMeters(23);
-    public static final double kWheelBase = Units.inchesToMeters(23);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(23);
+    public static final double WHEELBASE_LENGTH = Units.inchesToMeters(23);
     
-    public static final double kWheelDiameterMeters = Units.inchesToMeters(4.0);
-    public static final double kWheelCircumference = kWheelDiameterMeters * Math.PI;
+    public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(4.0);
+    public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER_METERS * Math.PI;
 
-    public static final double kDriveGearRatio = 6.12;
-    public static final double kAngleGearRatio = 12.8;
+    public static final double DRIVE_GEAR_RATIO = 6.12;
+    public static final double ANGLE_GEAR_RATIO = 12.8;
 
-    public static final double kWheelGripCoF = 1.19;
+    public static final double WHEEL_GRIP_COF = 1.19;
 
-    public static final edu.wpi.first.math.geometry.Translation2d[] kSwerveModuleLocations = {
-            new edu.wpi.first.math.geometry.Translation2d(kWheelBase / 2.0, kTrackWidth / 2.0),
-            new edu.wpi.first.math.geometry.Translation2d(kWheelBase / 2.0, -kTrackWidth / 2.0),
-            new edu.wpi.first.math.geometry.Translation2d(-kWheelBase / 2.0, kTrackWidth / 2.0),
-            new edu.wpi.first.math.geometry.Translation2d(-kWheelBase / 2.0, -kTrackWidth / 2.0)
+    public static final edu.wpi.first.math.geometry.Translation2d[] SWERVE_MODULE_LOCATIONS = {
+            new edu.wpi.first.math.geometry.Translation2d(WHEELBASE_LENGTH / 2.0, TRACK_WIDTH / 2.0),
+            new edu.wpi.first.math.geometry.Translation2d(WHEELBASE_LENGTH / 2.0, -TRACK_WIDTH / 2.0),
+            new edu.wpi.first.math.geometry.Translation2d(-WHEELBASE_LENGTH / 2.0, TRACK_WIDTH / 2.0),
+            new edu.wpi.first.math.geometry.Translation2d(-WHEELBASE_LENGTH / 2.0, -TRACK_WIDTH / 2.0)
     };
 
-    public static final SwerveDriveKinematics kKinematics = new SwerveDriveKinematics(kSwerveModuleLocations);
+    public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(SWERVE_MODULE_LOCATIONS);
     //#endregion
 
     //#region Swerve Motor Constants Definitions
 
     /* Current Limits */
-    public static final int kDriveContinuousSupplyCurrentLimit = 50;
-    public static final int kDrivePeakSupplyCurrentLimit = 60;
-    public static final double kDrivePeakSupplyCurrentDuration = 0.1;
-    public static final boolean kDriveEnableSupplyCurrentLimit = true;
+    public static final int DRIVE_CONTINUOUS_SUPPLY_CURRENT = 50;
+    public static final int DRIVE_PEAK_CURRENT_SUPPLY_LIMIT = 60;
+    public static final double DRIVE_PEAK_SUPPLY_CURRENT_DURATION = 0.1;
+    public static final boolean DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT = true;
 
-    public static final int kAngleContinuousSupplyCurrentLimit = 25;
-    public static final int kAnglePeakSupplyCurrentLimit = 40;
-    public static final double kAnglePeakSupplyCurrentDuration = 0.1;
-    public static final boolean kAngleEnableSupplyCurrentLimit = true;
+    public static final int ANGLE_CONTINUOUS_SUPPLY_CURRENT = 25;
+    public static final int ANGLE_PEAK_SUPPLY_CURRENT_LIMIT = 40;
+    public static final double ANGLE_PEAK_SUPPLY_CURRENT_DURATION = 0.1;
+    public static final boolean ANGLE_ENABLE_SUPPLY_CURRENT_LIMIT = true;
     
-    public static final int kDriveStatorCurrentLimit = 80;
-    public static final boolean kDriveEnableStatorCurrentLimit = true;
+    public static final int DRIVE_STATOR_CURRENT_LIMIT = 100;
+    public static final boolean DRIVE_ENABLE_STATOR_LIMIT = true;
 
-    public static final int kAngleStatorCurrentLimit = 50;
-    public static final boolean kAngleEnableStatorCurrentLimit = true;
+    public static final int ANGLE_STATOR_CURRENT_LIMIT = 50;
+    public static final boolean ANGLE_ENABLE_STATOR_LIMIT = true;
 
     /* Swerve Voltage */
-    public static final double kMaxDriveVoltage = 11.0;
-    public static final double kMaxAngleVoltage = 11.0;
+    public static final double MAX_DRIVE_VOLTAGE = 11.0;
+    public static final double MAX_ANGLE_VOLTAGE = 11.0;
 
     /* Ramp Rate */
-    public static final double kOpenLoopRamp = 0.25;
-    public static final double kClosedLoopRamp = 0.0;
+    public static final double OPEN_LOOP_RAMP = 0.25;
+    public static final double CLOSED_LOOP_RAMP = 0.0;
 
     /* Neutral Modes */
-    public static final NeutralModeValue kAngleNeutralMode = NeutralModeValue.Coast;
-    public static final NeutralModeValue kDriveNeutralMode = NeutralModeValue.Brake;
+    public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+    public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Coast;
 
     /* Motor Inverts */
-    public static final boolean driveMotorInvert = false;
-    public static final boolean angleMotorInvert = false;
+    public static final boolean DRIVE_MOTOR_INVERT = false;
+    public static final boolean ANGLE_MOTOR_INVERT = false;
 
     /* Angle Encoder Invert */
-    public static final boolean canCoderInvert = false;
+    public static final boolean CANCODER_INVERT = false;
 
     //#endregion
 
     //#region Swerve Profiling Values
-    public static final double kMaxSpeed = 5.4864; // meters per second
-    public static final double kMaxAccel = Double.MAX_VALUE; // meters per second squared - No acceleration limit
-    public static final double kMaxAngularVelocity = 11.5;
-    public static final double kMaxAttainableSpeed = kMaxSpeed * 0.85; // Max out at 85% to make sure speeds are attainable (4.6 mps)
+    public static final double MAX_SPEED = 5.4864; // meters per second
+    public static final double MAX_ACCELERATION = Double.MAX_VALUE; // meters per second squared - No acceleration limit
+    public static final double MAX_ANGULAR_VELOCITY = 11.5;
+    public static final double MAX_ATTAINABLE_SPEED = MAX_SPEED * 0.85; // Max out at 85% to make sure speeds are attainable (4.6 mps)
     //#endregion
 
     //#region Swerve PID Values
-    public static final double kDriveP = 1.0;
-    public static final double kDriveI = 0.0;
-    public static final double kDriveD = 0.0;
-    public static final double kDrivekV = kMaxDriveVoltage / kMaxSpeed;
-    public static final double kDrivekA = kMaxDriveVoltage / (kWheelGripCoF * 9.81);
+    public static final double DRIVE_P = 1.0;
+    public static final double DRIVE_I = 0.0;
+    public static final double DRIVE_D = 0.0;
+    public static final double DRIVE_KS = 0.0;
+    public static final double DRIVE_KV = MAX_DRIVE_VOLTAGE / MAX_SPEED;
+    public static final double DRIVE_KA = MAX_DRIVE_VOLTAGE / (WHEEL_GRIP_COF * 9.81);
 
 
-    public static final double kAngleP = 50.0;
-    public static final double kAngleI = 0.0;
-    public static final double kAngleD = 0.32;
-    public static final double kAngleFF = 0.0;
+    public static final double ANGLE_P = 50.0;
+    public static final double ANGLE_I = 0.0;
+    public static final double ANGLE_D = 0.32;
+    public static final double ANGLE_KS = 0.0;
+    public static final double ANGLE_KV = 0.0;
+    public static final double ANGLE_KA = 0.0;
+
     //#endregion
 
     //#region Swerve Control Profile
@@ -409,66 +413,69 @@ public final class Constants {
     //#region Swerve Module Specific
     /* Front Left Module - Module 0 */
     public static final class FrontLeftModule {
-      public static final double kCancoderAngleOffset = 289.248046875;
-      public static final int kDriveMotorIndex = 0;
-      public static final int kAngleMotorIndex = 1;
+      public static final double CANCODER_ANGLE_OFFSET = 289.248046875;
+      public static final int DRIVE_MOTOR_INDEX = 0;
+      public static final int ANGLE_MOTOR_INDEX = 1;
       public static final int kCancoderIndex = 0;
-      public static final boolean kDriveMotorInverted = true;
-      public static final boolean kAngleMotorInverted = false;
+      public static final boolean DRIVE_MOTOR_INVERTED = true;
+      public static final boolean ANGLE_MOTOR_INVERTED = false;
 
       public static TalonFXConfiguration swerveDriveFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kDriveEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kDriveContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kDrivePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kDrivePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = DRIVE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = DRIVE_PEAK_CURRENT_SUPPLY_LIMIT;
+        config.CurrentLimits.SupplyTimeThreshold = DRIVE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kDriveEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kDriveStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = DRIVE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = DRIVE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxDriveVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxDriveVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_DRIVE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_DRIVE_VOLTAGE;
 
-        config.Slot0.kP = kDriveP;
-        config.Slot0.kI = kDriveI;
-        config.Slot0.kD = kDriveD;
-        config.Slot0.kV = kDrivekV;
-        config.Slot0.kA = kDrivekA;
+        config.Slot0.kP = DRIVE_P;
+        config.Slot0.kI = DRIVE_I;
+        config.Slot0.kD = DRIVE_D;
+        config.Slot0.kS = DRIVE_KS;
+        config.Slot0.kV = DRIVE_KV;
+        config.Slot0.kA = DRIVE_KA;
 
-        config.MotorOutput.NeutralMode = kDriveNeutralMode;
+        config.MotorOutput.NeutralMode = DRIVE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         return config;
       }
 
       public static TalonFXConfiguration swerveAngleFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kAngleEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kAngleContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kAnglePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kAnglePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = ANGLE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = ANGLE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
+        config.CurrentLimits.SupplyTimeThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kAngleEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kAngleStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = ANGLE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = ANGLE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxAngleVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxAngleVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_ANGLE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_ANGLE_VOLTAGE;
 
-        config.Slot0.kP = kAngleP;
-        config.Slot0.kI = kAngleI;
-        config.Slot0.kD = kAngleD;
-        config.Slot0.kV = kAngleFF;
+        config.Slot0.kP = ANGLE_P;
+        config.Slot0.kI = ANGLE_I;
+        config.Slot0.kD = ANGLE_D;
+        config.Slot0.kS = ANGLE_KS;
+        config.Slot0.kV = ANGLE_KV;
+        config.Slot0.kA = ANGLE_KA;
 
-        config.MotorOutput.NeutralMode = kAngleNeutralMode;
+        config.MotorOutput.NeutralMode = ANGLE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
 
-        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = kClosedLoopRamp;
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
 
         return config;
       }
@@ -485,66 +492,69 @@ public final class Constants {
 
     /* Front Right Module - Module 1 */
     public static final class FrontRightModule {
-      public static final double kCancoderAngleOffset = 249.9609375;
-      public static final int kDriveMotorIndex = 2;
-      public static final int kAngleMotorIndex = 3;
-      public static final int kCancoderIndex = 1;
-      public static final boolean kDriveMotorInverted = true;
-      public static final boolean kAngleMotorInverted = false;
+      public static final double CANCODER_ANGLE_OFFSET = 249.9609375;
+      public static final int DRIVE_MOTOR_INDEX = 2;
+      public static final int ANGLE_MOTOR_INDEX = 3;
+      public static final int CANCODER_INDEX = 1;
+      public static final boolean DRIVE_MOTOR_INVERTED = true;
+      public static final boolean ANGLE_MOTOR_INVERTED = false;
 
       public static TalonFXConfiguration swerveDriveFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kDriveEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kDriveContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kDrivePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kDrivePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = DRIVE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = DRIVE_PEAK_CURRENT_SUPPLY_LIMIT;
+        config.CurrentLimits.SupplyTimeThreshold = DRIVE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kDriveEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kDriveStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = DRIVE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = DRIVE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxDriveVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxDriveVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_DRIVE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_DRIVE_VOLTAGE;
 
-        config.Slot0.kP = kDriveP;
-        config.Slot0.kI = kDriveI;
-        config.Slot0.kD = kDriveD;
-        config.Slot0.kV = kDrivekV;
-        config.Slot0.kA = kDrivekA;
+        config.Slot0.kP = DRIVE_P;
+        config.Slot0.kI = DRIVE_I;
+        config.Slot0.kD = DRIVE_D;
+        config.Slot0.kS = DRIVE_KS;
+        config.Slot0.kV = DRIVE_KV;
+        config.Slot0.kA = DRIVE_KA;
 
-        config.MotorOutput.NeutralMode = kDriveNeutralMode;
+        config.MotorOutput.NeutralMode = DRIVE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         return config;
       }
 
       public static TalonFXConfiguration swerveAngleFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kAngleEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kAngleContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kAnglePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kAnglePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = ANGLE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = ANGLE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = ANGLE_PEAK_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyTimeThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kAngleEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kAngleStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = ANGLE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = ANGLE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxAngleVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxAngleVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_ANGLE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_ANGLE_VOLTAGE;
 
-        config.Slot0.kP = kAngleP;
-        config.Slot0.kI = kAngleI;
-        config.Slot0.kD = kAngleD;
-        config.Slot0.kV = kAngleFF;
+        config.Slot0.kP = ANGLE_P;
+        config.Slot0.kI = ANGLE_I;
+        config.Slot0.kD = ANGLE_D;
+        config.Slot0.kS = ANGLE_KS;
+        config.Slot0.kV = ANGLE_KV;
+        config.Slot0.kA = ANGLE_KA;
 
-        config.MotorOutput.NeutralMode = kAngleNeutralMode;
+        config.MotorOutput.NeutralMode = ANGLE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
 
-        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = kClosedLoopRamp;
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
 
         return config;
       }
@@ -561,66 +571,69 @@ public final class Constants {
 
     /* Back Left Module - Module 2 */
     public static final class BackLeftModule {
-      public static final double kCancoderAngleOffset = 206.54296875;
-      public static final int kDriveMotorIndex = 4;
-      public static final int kAngleMotorIndex = 5;
+      public static final double CANCODER_ANGLE_OFFSET = 206.54296875;
+      public static final int DRIVE_MOTOR_INDEX = 4;
+      public static final int ANGLE_MOTOR_INDEX = 5;
       public static final int kCancoderIndex = 2;
-      public static final boolean kDriveMotorInverted = true;
-      public static final boolean kAngleMotorInverted = false;
+      public static final boolean DRIVE_MOTOR_INVERTED = true;
+      public static final boolean ANGLE_MOTOR_INVERTED = false;
 
       public static TalonFXConfiguration swerveDriveFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kDriveEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kDriveContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kDrivePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kDrivePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = DRIVE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = DRIVE_PEAK_CURRENT_SUPPLY_LIMIT;
+        config.CurrentLimits.SupplyTimeThreshold = DRIVE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kDriveEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kDriveStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = DRIVE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = DRIVE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxDriveVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxDriveVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_DRIVE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_DRIVE_VOLTAGE;
 
-        config.Slot0.kP = kDriveP;
-        config.Slot0.kI = kDriveI;
-        config.Slot0.kD = kDriveD;
-        config.Slot0.kV = kDrivekV;
-        config.Slot0.kA = kDrivekA;
+        config.Slot0.kP = DRIVE_P;
+        config.Slot0.kI = DRIVE_I;
+        config.Slot0.kD = DRIVE_D;
+        config.Slot0.kS = DRIVE_KS;
+        config.Slot0.kV = DRIVE_KV;
+        config.Slot0.kA = DRIVE_KA;
 
-        config.MotorOutput.NeutralMode = kDriveNeutralMode;
+        config.MotorOutput.NeutralMode = DRIVE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         return config;
       }
 
       public static TalonFXConfiguration swerveAngleFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kAngleEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kAngleContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kAnglePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kAnglePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = ANGLE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = ANGLE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
+        config.CurrentLimits.SupplyTimeThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kAngleEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kAngleStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = ANGLE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = ANGLE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxAngleVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxAngleVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_ANGLE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_ANGLE_VOLTAGE;
 
-        config.Slot0.kP = kAngleP;
-        config.Slot0.kI = kAngleI;
-        config.Slot0.kD = kAngleD;
-        config.Slot0.kV = kAngleFF;
+        config.Slot0.kP = ANGLE_P;
+        config.Slot0.kI = ANGLE_I;
+        config.Slot0.kD = ANGLE_D;
+        config.Slot0.kS = ANGLE_KS;
+        config.Slot0.kV = ANGLE_KV;
+        config.Slot0.kA = ANGLE_KA;
 
-        config.MotorOutput.NeutralMode = kAngleNeutralMode;
+        config.MotorOutput.NeutralMode = ANGLE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
 
-        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = kClosedLoopRamp;
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
 
         return config;
       }
@@ -638,66 +651,69 @@ public final class Constants {
 
     /* Back Left Module - Module 3 */
     public static final class BackRightModule {
-      public static final double kCancoderAngleOffset = 347.16;
-      public static final int kDriveMotorIndex = 6;
-      public static final int kAngleMotorIndex = 7;
+      public static final double CANCODER_ANGLE_OFFSET = 347.16;
+      public static final int DRIVE_MOTOR_INDEX = 6;
+      public static final int ANGLE_MOTOR_INDEX = 7;
       public static final int kCancoderIndex = 3;
-      public static final boolean kDriveMotorInverted = true;
-      public static final boolean kAngleMotorInverted = false;
+      public static final boolean DRIVE_MOTOR_INVERTED = true;
+      public static final boolean ANGLE_MOTOR_INVERTED = false;
 
       public static TalonFXConfiguration swerveDriveFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kDriveEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kDriveContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kDrivePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kDrivePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = DRIVE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = DRIVE_PEAK_CURRENT_SUPPLY_LIMIT;
+        config.CurrentLimits.SupplyTimeThreshold = DRIVE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kDriveEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kDriveStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = DRIVE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = DRIVE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxDriveVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxDriveVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_DRIVE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_DRIVE_VOLTAGE;
 
-        config.Slot0.kP = kDriveP;
-        config.Slot0.kI = kDriveI;
-        config.Slot0.kD = kDriveD;
-        config.Slot0.kV = kDrivekV;
-        config.Slot0.kA = kDrivekA;
+        config.Slot0.kP = DRIVE_P;
+        config.Slot0.kI = DRIVE_I;
+        config.Slot0.kD = DRIVE_D;
+        config.Slot0.kS = DRIVE_KS;
+        config.Slot0.kV = DRIVE_KV;
+        config.Slot0.kA = DRIVE_KA;
 
-        config.MotorOutput.NeutralMode = kDriveNeutralMode;
+        config.MotorOutput.NeutralMode = DRIVE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         return config;
       }
 
       public static TalonFXConfiguration swerveAngleFXConfig() {
         TalonFXConfiguration config = new TalonFXConfiguration();
-        config.CurrentLimits.SupplyCurrentLimitEnable = kAngleEnableSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentLimit = kAngleContinuousSupplyCurrentLimit;
-        config.CurrentLimits.SupplyCurrentThreshold = kAnglePeakSupplyCurrentLimit;
-        config.CurrentLimits.SupplyTimeThreshold = kAnglePeakSupplyCurrentDuration;
+        config.CurrentLimits.SupplyCurrentLimitEnable = ANGLE_ENABLE_SUPPLY_CURRENT_LIMIT;
+        config.CurrentLimits.SupplyCurrentLimit = ANGLE_CONTINUOUS_SUPPLY_CURRENT;
+        config.CurrentLimits.SupplyCurrentThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
+        config.CurrentLimits.SupplyTimeThreshold = ANGLE_PEAK_SUPPLY_CURRENT_DURATION;
 
-        config.CurrentLimits.StatorCurrentLimitEnable = kAngleEnableStatorCurrentLimit;
-        config.CurrentLimits.StatorCurrentLimit = kAngleStatorCurrentLimit;
+        config.CurrentLimits.StatorCurrentLimitEnable = ANGLE_ENABLE_STATOR_LIMIT;
+        config.CurrentLimits.StatorCurrentLimit = ANGLE_STATOR_CURRENT_LIMIT;
 
-        config.Voltage.PeakForwardVoltage = kMaxAngleVoltage;
-        config.Voltage.PeakReverseVoltage = -kMaxAngleVoltage;
+        config.Voltage.PeakForwardVoltage = MAX_ANGLE_VOLTAGE;
+        config.Voltage.PeakReverseVoltage = -MAX_ANGLE_VOLTAGE;
 
-        config.Slot0.kP = kAngleP;
-        config.Slot0.kI = kAngleI;
-        config.Slot0.kD = kAngleD;
-        config.Slot0.kV = kAngleFF;
+        config.Slot0.kP = ANGLE_P;
+        config.Slot0.kI = ANGLE_I;
+        config.Slot0.kD = ANGLE_D;
+        config.Slot0.kS = ANGLE_KS;
+        config.Slot0.kV = ANGLE_KV;
+        config.Slot0.kA = ANGLE_KA;
 
-        config.MotorOutput.NeutralMode = kAngleNeutralMode;
+        config.MotorOutput.NeutralMode = ANGLE_NEUTRAL_MODE;
 
-        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = kOpenLoopRamp;
-        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = kOpenLoopRamp;
+        config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
 
-        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = kClosedLoopRamp;
-        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = kClosedLoopRamp;
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
 
         return config;
       }
