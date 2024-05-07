@@ -312,12 +312,13 @@ public final class Constants {
     public static final int BTN_12 = 12;
   }
 
-  public static final class SwerveConstants {
+  public static final class TalonFXSwerveConstants {
 
     //#region Drivetrain Constants Definitions
     public static final double TRACK_WIDTH = Units.inchesToMeters(23);
     public static final double WHEELBASE_LENGTH = Units.inchesToMeters(23);
     
+    public static final double WHEEL_RADIUS_METERS = Units.inchesToMeters(2.0);
     public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(4.0);
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER_METERS * Math.PI;
 
@@ -403,10 +404,10 @@ public final class Constants {
 
     //#region Swerve Control Profile
     /* Controller Invert */
-    public static final boolean kInvertXAxis = false;
-    public static final boolean kInvertYAxis = false;
-    public static final boolean kInvertRAxis = false;
-    public static final double kSwerveDeadband = 0.1;
+    public static final boolean INVERT_X_AXIS = false;
+    public static final boolean INVERT_Y_AXIS = false;
+    public static final boolean INVERT_R_AXIS = false;
+    public static final double SWERVE_DEADBAND = 0.1;
     //#endregion
 
 
@@ -416,7 +417,7 @@ public final class Constants {
       public static final double CANCODER_ANGLE_OFFSET = 289.248046875;
       public static final int DRIVE_MOTOR_INDEX = 0;
       public static final int ANGLE_MOTOR_INDEX = 1;
-      public static final int kCancoderIndex = 0;
+      public static final int CANCODER_INDEX = 0;
       public static final boolean DRIVE_MOTOR_INVERTED = true;
       public static final boolean ANGLE_MOTOR_INVERTED = false;
 
@@ -444,6 +445,12 @@ public final class Constants {
 
         config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+
         return config;
       }
 
@@ -574,7 +581,7 @@ public final class Constants {
       public static final double CANCODER_ANGLE_OFFSET = 206.54296875;
       public static final int DRIVE_MOTOR_INDEX = 4;
       public static final int ANGLE_MOTOR_INDEX = 5;
-      public static final int kCancoderIndex = 2;
+      public static final int CANCODER_INDEX = 2;
       public static final boolean DRIVE_MOTOR_INVERTED = true;
       public static final boolean ANGLE_MOTOR_INVERTED = false;
 
@@ -602,6 +609,12 @@ public final class Constants {
 
         config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+
         return config;
       }
 
@@ -654,7 +667,7 @@ public final class Constants {
       public static final double CANCODER_ANGLE_OFFSET = 347.16;
       public static final int DRIVE_MOTOR_INDEX = 6;
       public static final int ANGLE_MOTOR_INDEX = 7;
-      public static final int kCancoderIndex = 3;
+      public static final int CANCODER_INDEX = 3;
       public static final boolean DRIVE_MOTOR_INVERTED = true;
       public static final boolean ANGLE_MOTOR_INVERTED = false;
 
@@ -682,6 +695,12 @@ public final class Constants {
 
         config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = OPEN_LOOP_RAMP;
         config.OpenLoopRamps.VoltageOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+        config.OpenLoopRamps.TorqueOpenLoopRampPeriod = OPEN_LOOP_RAMP;
+
+        config.ClosedLoopRamps.DutyCycleClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.VoltageClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+        config.ClosedLoopRamps.TorqueClosedLoopRampPeriod = CLOSED_LOOP_RAMP;
+
         return config;
       }
 

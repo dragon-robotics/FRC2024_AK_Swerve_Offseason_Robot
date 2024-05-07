@@ -24,15 +24,15 @@ public interface ModuleIO {
     public double driveAppliedVolts = 0.0;
     public double[] driveCurrentAmps = new double[] {};
 
-    public Rotation2d turnAbsolutePosition = new Rotation2d();
-    public Rotation2d turnPosition = new Rotation2d();
-    public double turnVelocityRadPerSec = 0.0;
-    public double turnAppliedVolts = 0.0;
-    public double[] turnCurrentAmps = new double[] {};
+    public Rotation2d angleAbsolutePosition = new Rotation2d();
+    public Rotation2d anglePosition = new Rotation2d();
+    public double angleVelocityRadPerSec = 0.0;
+    public double angleAppliedVolts = 0.0;
+    public double[] angleCurrentAmps = new double[] {};
 
     public double[] odometryTimestamps = new double[] {};
     public double[] odometryDrivePositionsRad = new double[] {};
-    public Rotation2d[] odometryTurnPositions = new Rotation2d[] {};
+    public Rotation2d[] odometryAnglePositions = new Rotation2d[] {};
   }
 
   /** Updates the set of loggable inputs. */
@@ -41,12 +41,12 @@ public interface ModuleIO {
   /** Run the drive motor at the specified voltage. */
   public default void setDriveVoltage(double volts) {}
 
-  /** Run the turn motor at the specified voltage. */
-  public default void setTurnVoltage(double volts) {}
+  /** Run the angle motor at the specified voltage. */
+  public default void setAngleVoltage(double volts) {}
 
   /** Enable or disable brake mode on the drive motor. */
   public default void setDriveBrakeMode(boolean enable) {}
 
-  /** Enable or disable brake mode on the turn motor. */
-  public default void setTurnBrakeMode(boolean enable) {}
+  /** Enable or disable brake mode on the angle motor. */
+  public default void setAngleBrakeMode(boolean enable) {}
 }

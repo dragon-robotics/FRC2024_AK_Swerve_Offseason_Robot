@@ -32,10 +32,10 @@ public class Module {
 
   private final SimpleMotorFeedforward driveFeedforward;
   private final PIDController driveFeedback;
-  private final PIDController turnFeedback;
+  private final PIDController angleFeedback;
   private Rotation2d angleSetpoint = null; // Setpoint for closed loop control, null for open loop
   private Double speedSetpoint = null; // Setpoint for closed loop control, null for open loop
-  private Rotation2d turnRelativeOffset = null; // Relative + Offset = Absolute
+  private Rotation2d angleRelativeOffset = null; // Relative + Offset = Absolute
   private SwerveModulePosition[] odometryPositions = new SwerveModulePosition[] {};
 
   public Module(ModuleIO io, int index) {
@@ -49,21 +49,21 @@ public class Module {
       case REPLAY:
         driveFeedforward = new SimpleMotorFeedforward(0.1, 0.13);
         driveFeedback = new PIDController(0.05, 0.0, 0.0);
-        turnFeedback = new PIDController(7.0, 0.0, 0.0);
+        angleFeedback = new PIDController(7.0, 0.0, 0.0);
         break;
       case SIM:
         driveFeedforward = new SimpleMotorFeedforward(0.0, 0.13);
         driveFeedback = new PIDController(0.1, 0.0, 0.0);
-        turnFeedback = new PIDController(10.0, 0.0, 0.0);
+        angleFeedback = new PIDController(10.0, 0.0, 0.0);
         break;
       default:
         driveFeedforward = new SimpleMotorFeedforward(0.0, 0.0);
         driveFeedback = new PIDController(0.0, 0.0, 0.0);
-        turnFeedback = new PIDController(0.0, 0.0, 0.0);
+        angleFeedback = new PIDController(0.0, 0.0, 0.0);
         break;
     }
 
-    turnFeedback.enableContinuousInput(-Math.PI, Math.PI);
+    angleFeedback.enableContinuousInput(-Math.PI, Math.PI);
     setBrakeMode(true);
   }
 
@@ -78,26 +78,26 @@ public class Module {
   public void periodic() {
     Logger.processInputs("Drive/Module" + Integer.toString(index), inputs);
 
-    // On first cycle, reset relative turn encoder
+    // On first cycle, reset relative angle encoder
     // Wait until absolute angle is nonzero in case it wasn't initialized yet
-    if (turnRelativeOffset == null && inputs.turnAbsolutePosition.getRadians() != 0.0) {
-      turnRelativeOffset = inputs.turnAbsolutePosition.minus(inputs.turnPosition);
+    if (angleRelativeOffset == null && inputs.angleAbsolutePosition.getRadians() != 0.0) {
+      angleRelativeOffset = inputs.angleAbsolutePosition.minus(inputs.anglePosition);
     }
 
-    // Run closed loop turn control
+    // Run closed loop angle control
     if (angleSetpoint != null) {
-      io.setTurnVoltage(
-          turnFeedback.calculate(getAngle().getRadians(), angleSetpoint.getRadians()));
+      io.setAngleVoltage(
+          angleFeedback.calculate(getAngle().getRadians(), angleSetpoint.getRadians()));
 
       // Run closed loop drive control
-      // Only allowed if closed loop turn control is running
+      // Only allowed if closed loop angle control is running
       if (speedSetpoint != null) {
-        // Scale velocity based on turn error
+        // Scale velocity based on angle error
         //
-        // When the error is 90°, the velocity setpoint should be 0. As the wheel turns
+        // When the error is 90°, the velocity setpoint should be 0. As the wheel angles
         // towards the setpoint, its velocity should increase. This is achieved by
         // taking the component of the velocity in the direction of the setpoint.
-        double adjustSpeedSetpoint = speedSetpoint * Math.cos(turnFeedback.getPositionError());
+        double adjustSpeedSetpoint = speedSetpoint * Math.cos(angleFeedback.getPositionError());
 
         // Run drive controller
         double velocityRadPerSec = adjustSpeedSetpoint / WHEEL_RADIUS;
@@ -113,8 +113,8 @@ public class Module {
     for (int i = 0; i < sampleCount; i++) {
       double positionMeters = inputs.odometryDrivePositionsRad[i] * WHEEL_RADIUS;
       Rotation2d angle =
-          inputs.odometryTurnPositions[i].plus(
-              turnRelativeOffset != null ? turnRelativeOffset : new Rotation2d());
+          inputs.odometryAnglePositions[i].plus(
+              angleRelativeOffset != null ? angleRelativeOffset : new Rotation2d());
       odometryPositions[i] = new SwerveModulePosition(positionMeters, angle);
     }
   }
@@ -134,7 +134,7 @@ public class Module {
 
   /** Runs the module with the specified voltage while controlling to zero degrees. */
   public void runCharacterization(double volts) {
-    // Closed loop turn control
+    // Closed loop angle control
     angleSetpoint = new Rotation2d();
 
     // Open loop drive control
@@ -144,10 +144,10 @@ public class Module {
 
   /** Disables all outputs to motors. */
   public void stop() {
-    io.setTurnVoltage(0.0);
+    io.setAngleVoltage(0.0);
     io.setDriveVoltage(0.0);
 
-    // Disable closed loop control for turn and drive
+    // Disable closed loop control for angle and drive
     angleSetpoint = null;
     speedSetpoint = null;
   }
@@ -155,15 +155,15 @@ public class Module {
   /** Sets whether brake mode is enabled. */
   public void setBrakeMode(boolean enabled) {
     io.setDriveBrakeMode(enabled);
-    io.setTurnBrakeMode(enabled);
+    io.setAngleBrakeMode(enabled);
   }
 
-  /** Returns the current turn angle of the module. */
+  /** Returns the current angle angle of the module. */
   public Rotation2d getAngle() {
-    if (turnRelativeOffset == null) {
+    if (angleRelativeOffset == null) {
       return new Rotation2d();
     } else {
-      return inputs.turnPosition.plus(turnRelativeOffset);
+      return inputs.anglePosition.plus(angleRelativeOffset);
     }
   }
 
@@ -177,12 +177,12 @@ public class Module {
     return inputs.driveVelocityRadPerSec * WHEEL_RADIUS;
   }
 
-  /** Returns the module position (turn angle and drive position). */
+  /** Returns the module position (angle angle and drive position). */
   public SwerveModulePosition getPosition() {
     return new SwerveModulePosition(getPositionMeters(), getAngle());
   }
 
-  /** Returns the module state (turn angle and drive velocity). */
+  /** Returns the module state (angle angle and drive velocity). */
   public SwerveModuleState getState() {
     return new SwerveModuleState(getVelocityMetersPerSec(), getAngle());
   }

@@ -29,7 +29,8 @@ import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
-import frc.robot.subsystems.drive.ModuleIOSparkMax;
+// import frc.robot.subsystems.drive.ModuleIOSparkMax;
+import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.flywheel.Flywheel;
 import frc.robot.subsystems.flywheel.FlywheelIO;
 import frc.robot.subsystems.flywheel.FlywheelIOSim;
@@ -56,25 +57,34 @@ public class RobotContainer {
   private final LoggedDashboardNumber flywheelSpeedInput =
       new LoggedDashboardNumber("Flywheel Speed", 1500.0);
 
+  // Module Positions
+  private enum ModulePosition {
+    FRONT_LEFT,
+    FRONT_RIGHT,
+    BACK_LEFT,
+    BACK_RIGHT
+  }
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
-        drive =
-            new Drive(
-                new GyroIOPigeon2(false),
-                new ModuleIOSparkMax(0),
-                new ModuleIOSparkMax(1),
-                new ModuleIOSparkMax(2),
-                new ModuleIOSparkMax(3));
+        // drive =
+        //     new Drive(
+        //         new GyroIOPigeon2(false),
+        //         new ModuleIOSparkMax(ModulePosition.FRONT_LEFT.ordinal()),
+        //         new ModuleIOSparkMax(ModulePosition.FRONT_RIGHT.ordinal()),
+        //         new ModuleIOSparkMax(ModulePosition.BACK_LEFT.ordinal()),
+        //         new ModuleIOSparkMax(ModulePosition.BACK_RIGHT.ordinal()));
         flywheel = new Flywheel(new FlywheelIOSparkMax());
-        // drive = new Drive(
-        // new GyroIOPigeon2(true),
-        // new ModuleIOTalonFX(0),
-        // new ModuleIOTalonFX(1),
-        // new ModuleIOTalonFX(2),
-        // new ModuleIOTalonFX(3));
+        drive = new Drive(
+        new GyroIOPigeon2(true),
+            new ModuleIOTalonFX(ModulePosition.FRONT_LEFT.ordinal()),
+            new ModuleIOTalonFX(ModulePosition.FRONT_RIGHT.ordinal()),
+            new ModuleIOTalonFX(ModulePosition.BACK_LEFT.ordinal()),
+            new ModuleIOTalonFX(ModulePosition.BACK_RIGHT.ordinal())
+        );
         // flywheel = new Flywheel(new FlywheelIOTalonFX());
         break;
 
