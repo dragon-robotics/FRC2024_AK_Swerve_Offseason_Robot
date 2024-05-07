@@ -341,7 +341,7 @@ public final class Constants {
 
     /* Current Limits */
     public static final int DRIVE_CONTINUOUS_SUPPLY_CURRENT = 50;
-    public static final int DRIVE_PEAK_CURRENT_SUPPLY_LIMIT = 60;
+    public static final int DRIVE_PEAK_CURRENT_SUPPLY_LIMIT = 75;
     public static final double DRIVE_PEAK_SUPPLY_CURRENT_DURATION = 0.1;
     public static final boolean DRIVE_ENABLE_SUPPLY_CURRENT_LIMIT = true;
 
